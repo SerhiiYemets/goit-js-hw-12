@@ -1,4 +1,4 @@
-import { getImageByQuery, getImagesByQuery } from "./js/pixabay-api";
+import { getImagesByQuery } from './js/pixabay-api.js';
 
 import {
     createGallery,
@@ -48,8 +48,8 @@ async function onSearch(event) {
     }
 
     try {
-        const data = await getImageByQuery(currentQuery, currentPage);
-        if (!data || !Array.isArray(toFormData.hits)) {
+        const data = await getImagesByQuery(currentQuery, currentPage);
+        if (!data || !Array.isArray(data.hits)) {
             iziToast.error({
                 message: 'Received incorrect data while loading additional images. Please try again.',
                 position: 'topRight',
@@ -57,7 +57,7 @@ async function onSearch(event) {
             hideLoader();
             return;
         }
-        totalHits = toFormData.totalHits;
+        totalHits = data.totalHits;
 
         if (data.hits.length === 0) {
             iziToast.error({
@@ -91,7 +91,7 @@ async function onLoadMore() {
 
     try {
         const data = await getImagesByQuery(currentQuery, currentPage);
-        if (!data || !Array.isArray(toFormData.hits)) {
+        if (!data || !Array.isArray(data.hits)) {
             iziToast.error({
                 message: 'Received incorrect data while loading additional images. Please try again.',
                 position: 'topRight',
