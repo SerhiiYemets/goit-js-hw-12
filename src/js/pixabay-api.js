@@ -18,7 +18,7 @@ export async function getImageByQuery(query, page) {
         });
 
         if (!response.data.hits) {
-            throw new Error('Неожиданный формат ответа API');
+            throw new Error('Unexpected API response format');
         }
 
         return response.data;
